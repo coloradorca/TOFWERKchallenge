@@ -1,4 +1,4 @@
-#TOFWERK Take home challenge
+# TOFWERK Take home challenge
 
 ## Wire up the React front end to the Python server using Socket.IO protocol
 
