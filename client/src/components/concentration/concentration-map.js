@@ -8,10 +8,6 @@ socket.on('connect', () =>
   console.log('connected to socket.io')
 )
 
-// socket.on('data', (data) => {
-//   console.log(data)
-// })
-
 
 export function ConcentrationMap(props) {
 

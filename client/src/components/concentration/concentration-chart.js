@@ -2,34 +2,19 @@ import React from "react";
 import {useState, useEffect} from "react"
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import io from 'socket.io-client'
+import moment from 'moment'
 
 const ENDPOINT = 'http://127.0.0.1:5000'
-// const socket = io('http://127.0.0.1:5000')
-
-// socket.on('connect', () =>
-//   console.log('connected to socket.io')
-// )
-
-// socket.on('data', (data) => {
-//   console.log(data)
-// })
 
 export function ConcentrationChart(props) {
-  const [time, setTime] = useState([])
-  const [benzene, setBenzene] = useState([])
-  const [acetone, setAcetone] = useState([])
   const [data, setData] = useState([])
 
   useEffect(() => {
     const socket = io(ENDPOINT)
     socket.on('data', (data) => {
       setData((allData) => [...allData, data])
-      setTime((time) => [...time, data.time])
-      setBenzene((benzene) => [...benzene, data.Benzene])
-      setAcetone((acetone) => [...acetone,data.Acetone])
     })
   }, [])
-
 
   return <div>
 
@@ -42,7 +27,7 @@ export function ConcentrationChart(props) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="time" />
+        <XAxis dataKey='time' tickFormatter={timeStr => moment(timeStr).format("HH:mm:ss")} />
         <YAxis />
         <Tooltip />
         <Legend />
